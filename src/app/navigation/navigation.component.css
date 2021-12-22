@@ -1,0 +1,73 @@
+.logo {
+  margin-bottom: 20px;
+  display: block;
+  text-indent: -9999px;
+  width: 380px;
+  height: 50px;
+  background: url(../../assets/brand/rost-solutions.svg);
+  background-size: 380px 50px;
+  -webkit-filter: invert(100%); /* safari 6.0 - 9.0 */
+  filter: invert(100%);
+}
+
+/*.material-icons {*/
+/*  font-size: 30px;*/
+/*}*/
+
+.mat-menu-item {
+  height: 30px;
+  line-height: 30px;
+}
+
+.login-body {
+  height: 100%;
+}
+
+/*.navigation-container {*/
+/*  position: absolute;*/
+/*  top: 60px;*/
+/*  bottom: 60px;*/
+/*  left: 0;*/
+/*  right: 0;*/
+/*}*/
+
+.content-body {
+  height: 100%;
+  /*display: flex;*/
+  /*justify-content: center;*/
+  /*align-items: center;*/
+}
+
+.editor-drawer {
+  width: 30%;
+}
+
+/*.example-container {*/
+/*  position: absolute;*/
+/*  top: 60px;*/
+/*  bottom: 0px;*/
+/*  left: 0;*/
+/*  right: 0;*/
+/*}*/
+
+/*.example-sidenav {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  justify-content: center;*/
+/*width: 200px;*/
+/*background: rgba(255, 0, 0, 0.5);*/
+/*}*/
+
+/*.example-container {*/
+/*  width: 400px;*/
+/*  height: 200px;*/
+/*  margin: 12px;*/
+/*  border: 0px solid #555;*/
+/*}*/
+
+/*mat-drawer-content {*/
+/*  padding: 12px;*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  align-items: flex-start;*/
+/*}*/

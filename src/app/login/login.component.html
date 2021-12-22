@@ -1,0 +1,26 @@
+<div *ngIf="!isLoggedIn" class="body">
+  <div class="login">
+    <img class="logo" src="../assets/brand/rost-solutions.svg" alt="" width="100%">
+    <mat-tab-group>
+      <mat-tab label="Login">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Username</mat-label>
+            <input matInput type="text" formControlName="username">
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password">
+          </mat-form-field>
+          <br>
+          <button type="submit" class="full-width" mat-raised-button mat-button color="primary"
+                  [disabled]="form.invalid">Login
+          </button>
+        </form>
+      </mat-tab>
+      <mat-tab label="Forgot Password">
+        <app-forgot-password></app-forgot-password>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

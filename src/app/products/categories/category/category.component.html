@@ -1,0 +1,24 @@
+<div class="content-editor">
+  <mat-toolbar>
+    <span *ngIf="category && category.name === ''">New Property</span>
+    <span *ngIf="category && category.name !== ''">{{category.name}}</span>
+  </mat-toolbar>
+  <mat-card>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-grid-list cols="1" rowHeight="70px">
+        <mat-grid-tile>
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Fill Category Name</mat-label>
+            <input matInput placeholder="Category Name" formControlName="categoryName"
+                   [(ngModel)]="category && category.name">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <button type="submit" mat-raised-button mat-button color="primary" [disabled]="form.invalid">Save</button>
+          <button type="button" mat-raised-button mat-button style="margin-left: 20px" (click)="onCancel()">Cancel
+          </button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+  </mat-card>
+</div>

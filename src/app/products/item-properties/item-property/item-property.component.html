@@ -1,0 +1,44 @@
+<div class="content-editor">
+  <mat-toolbar>
+    <span *ngIf="property && property.name === ''">New Property</span>
+    <span *ngIf="property && property.name !== ''">{{property.name}}</span>
+  </mat-toolbar>
+  <mat-card>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-grid-list cols="1" rowHeight="70px">
+        <mat-grid-tile>
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Fill Property Name</mat-label>
+            <input matInput placeholder="Property Name" formControlName="propertyName"
+                   [(ngModel)]="property && property.name">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Choose Property Value Type</mat-label>
+            <mat-select formControlName="propertyValueType" [(ngModel)]="property && property.type">
+              <mat-option *ngFor="let valueType of propertyValueTypes" [value]="valueType.token">
+                {{valueType.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Choose Property Value Data Type</mat-label>
+            <mat-select formControlName="propertyValueDataType" [(ngModel)]="property && property.dataType">
+              <mat-option *ngFor="let valueDataType of propertyValueDataTypes" [value]="valueDataType.token">
+                {{valueDataType.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <button type="submit" mat-raised-button mat-button color="primary" [disabled]="form.invalid">Save</button>
+          <button type="button" mat-raised-button mat-button style="margin-left: 20px" (click)="onCancel()">Cancel
+          </button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+  </mat-card>
+</div>

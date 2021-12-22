@@ -1,0 +1,74 @@
+<div class="router-outlet-content-container">
+  <mat-toolbar>
+    <span>Properties</span>
+    <span class="toolbar-spacer"></span>
+    <button mat-raised-button mat-button color="primary" (click)="createProperty()">New Property</button>
+  </mat-toolbar>
+
+  <mat-form-field appearance="outline" style="margin-top: 10px; width: 200px">
+    <mat-label>Choose Item Level</mat-label>
+    <mat-select (selectionChange)="loadData($event.value)" [value]="itemLevel">
+      <mat-option *ngFor="let level of itemLevels" [value]="level">
+        {{level.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div *ngIf="properties.length > 0">
+    <mat-form-field appearance="standard">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+
+    <div class="mat-elevation-z2">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name</th>
+          <td mat-cell *matCellDef="let property"> {{property.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="valueType">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Value Type</th>
+          <td mat-cell *matCellDef="let property"> {{property.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="valueDataType">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Value Data Type</th>
+          <td mat-cell *matCellDef="let property"> {{property.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="itemLevel">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Item Level</th>
+          <td mat-cell *matCellDef="let property"> {{property.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let property" class="mat-cell-actions">
+            <a matTooltip="Delete" [class.disabled]="property.itemLevel !== itemLevel.token ? true : null"
+               (click)="deleteProperty(property)"
+               matTooltipPosition="above" matRipple [matRippleCentered]="true" [matRippleRadius]="25">
+              <mat-icon *ngIf="property.itemLevel === itemLevel.token" color="warn">delete</mat-icon>
+              <mat-icon *ngIf="property.itemLevel !== itemLevel.token">delete</mat-icon>
+            </a>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="row-highlighting"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+  <div *ngIf="properties.length === 0" class="no-table-content-message">
+    <mat-chip-list>
+      <mat-chip color="accent" selected>There is no properties yet</mat-chip>
+    </mat-chip-list>
+  </div>
+</div>

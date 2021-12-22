@@ -1,0 +1,38 @@
+table {
+  width: 100%;
+}
+
+/*.mat-form-field {*/
+/*  font-size: 14px;*/
+/*  width: 100%;*/
+/*}*/
+
+/*.categories-content-list {*/
+/*  display: block;*/
+/*  width: 100%;*/
+/*}*/
+
+/*.categories-content-edit {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  !*width: 100%;*!*/
+/*  align-items: flex-start;*/
+/*  justify-content: flex-start;*/
+/*  height: 100%;*/
+/*  width: 100%;*/
+
+/*  !*display:inline-block; max-width:200px; min-width:100px; margin:0 10px;*!*/
+/*}*/
+
+/*tr.example-element-row:not(.example-expanded-row):hover {*/
+/*  background: whitesmoke;*/
+/*}*/
+
+/*tr.example-element-row:not(.example-expanded-row):active {*/
+/*  background: #efefef;*/
+/*}*/
+
+/*.mat-grid-tile-content {*/
+/*  justify-content: flex-start !important ;*/
+/*  align-items: flex-start !important;*/
+/*}*/
