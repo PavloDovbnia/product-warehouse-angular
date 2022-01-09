@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 
 import {CategoriesService} from '../../services/categories/categories.service';
 import {Category} from "../../services/categories/category";
@@ -14,7 +14,7 @@ import {UtilsService} from "../../services/utils/utils.service";
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.css']
 })
-export class CategoriesComponent implements OnInit, AfterViewInit {
+export class CategoriesComponent implements OnInit {
 
   constructor(private utilsService: UtilsService, private categoriesService: CategoriesService, private navigation: NavigationComponent, private router: Router) {
   }
@@ -25,11 +25,12 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['name', 'actions'];
   dataSource = new MatTableDataSource(this.categories);
 
-  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
-  @ViewChild(MatSort) sort: MatSort | undefined;
+  @ViewChild(MatPaginator) set matPaginator(paginator: MatPaginator) {
+    this.dataSource.paginator = paginator;
+  }
 
-  ngAfterViewInit(): void {
-    this.decorateDataSource();
+  @ViewChild(MatSort) set MatSort(sort: MatSort) {
+    this.dataSource.sort = sort;
   }
 
   applyFilter(event: Event) {
@@ -57,8 +58,8 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
   }
 
   createCategory() {
-    this.categoriesService.shareCategory(new Category(BigInt(0), ''));
-    this.router.navigate(['', {outlets: {editor: ['products', 'categories', 'new']}}]).then(() => {
+    this.categoriesService.shareCategory(Category.empty());
+    this.router.navigate(['', {outlets: {editor: ['products', 'categories', 'new']},}], {skipLocationChange: true}).then(() => {
     });
     this.navigation.toggleEditor();
   }
@@ -79,10 +80,5 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
       this.categories = categories;
       this.dataSource.data = categories;
     });
-  }
-
-  private decorateDataSource(): void {
-    this.dataSource.paginator = this.paginator ? this.paginator : null;
-    this.dataSource.sort = this.sort ? this.sort : null;
   }
 }

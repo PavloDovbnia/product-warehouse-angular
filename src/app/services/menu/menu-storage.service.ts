@@ -15,14 +15,14 @@ export class MenuStorageService {
 
   public saveMenu(menu: Menu[], authorities: string[]) {
     let key = MenuStorageService.getKey(authorities);
-    window.localStorage.removeItem(key);
-    window.localStorage.setItem(key, JSON.stringify(menu));
+    window.sessionStorage.removeItem(key);
+    window.sessionStorage.setItem(key, JSON.stringify(menu));
   }
 
   public getMenu(authorities: string[]): Menu[] {
     let key = MenuStorageService.getKey(authorities);
-    if (window.localStorage.getItem(key)) {
-      this.menu = JSON.parse(<string>window.localStorage.getItem(key));
+    if (window.sessionStorage.getItem(key)) {
+      this.menu = JSON.parse(<string>window.sessionStorage.getItem(key));
     }
     return this.menu;
   }

@@ -11,47 +11,85 @@ import {ForgotPasswordComponent} from "./login/forgot-password/forgot-password.c
 import {ResetPasswordComponent} from "./login/reset-password/reset-password.component";
 import {ItemPropertiesComponent} from "./products/item-properties/item-properties.component";
 import {ItemPropertyComponent} from "./products/item-properties/item-property/item-property.component";
+import {ManufacturersComponent} from "./products/manufacturers/manufacturers.component";
+import {ManufacturerComponent} from "./products/manufacturers/manufacturer/manufacturer.component";
+import {ChangePasswordComponent} from "./login/change-password/change-password.component";
+import {UserComponent} from "./register/user/user.component";
+import {ProductsStockDataComponent} from "./products-stock-data/products-stock-data.component";
+import {ProductProviderComponent} from "./products-stock-data/product-provider/product-provider.component";
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     component: HomeComponent,
     canActivate: [AuthGuard],
-  },
-  {
-    path: 'products/categories/:id',
-    component: CategoryComponent,
-    outlet: 'editor',
-  },
-  {
-    path: 'products/categories/new',
-    component: CategoryComponent,
-    outlet: 'editor',
-  },
-  {
-    path: 'products/categories',
-    component: CategoriesComponent,
-    outlet: 'content'
-  },
-  {
-    path: 'products/properties/new',
-    component: ItemPropertyComponent,
-    outlet: 'editor'
-  },
-  {
-    path: 'products/properties/:id',
-    component: ItemPropertyComponent,
-    outlet: 'editor'
-  },
-  {
-    path: 'products/properties',
-    component: ItemPropertiesComponent,
-    outlet: 'content'
-  },
-  {
-    path: 'register',
-    component: RegisterComponent,
-    outlet: 'content'
+    children: [
+      {
+        path: 'products/categories/:id',
+        component: CategoryComponent,
+        outlet: 'editor',
+      },
+      // {
+      //   path: 'products/categories/new',
+      //   component: CategoryComponent,
+      //   outlet: 'editor',
+      // },
+      {
+        path: 'products/categories',
+        component: CategoriesComponent,
+      },
+      // {
+      //   path: 'products/properties/new',
+      //   component: ItemPropertyComponent,
+      //   outlet: 'editor'
+      // },
+      {
+        path: 'products/properties/:id',
+        component: ItemPropertyComponent,
+        outlet: 'editor'
+      },
+      {
+        path: 'products/properties',
+        component: ItemPropertiesComponent,
+      },
+      {
+        path: 'products/manufacturers',
+        component: ManufacturersComponent
+      },
+      // {
+      //   path: 'products/manufacturer/new',
+      //   component: ManufacturersComponent,
+      //   outlet: 'editor'
+      // },
+      {
+        path: 'products/manufacturer/:id',
+        component: ManufacturerComponent,
+        outlet: 'editor'
+      },
+      {
+        path: 'users',
+        component: RegisterComponent,
+      },
+      {
+        path: 'users/user/new',
+        component: UserComponent,
+        outlet: 'editor',
+      },
+      {
+        path: 'users/user/:id',
+        component: UserComponent,
+        outlet: 'editor',
+      },
+      {
+        path: 'stock-data',
+        component: ProductsStockDataComponent,
+      },
+      {
+        path: 'product-provider/:productId',
+        component: ProductProviderComponent,
+        outlet: 'editor',
+      },
+    ]
   },
   {
     path: 'auth/login',
@@ -66,13 +104,12 @@ const routes: Routes = [
     component: ResetPasswordComponent
   },
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    path: 'change-password',
+    component: ChangePasswordComponent
   },
   {
     path: '**',
-    redirectTo: 'home'
+    redirectTo: ''
   }
 ];
 

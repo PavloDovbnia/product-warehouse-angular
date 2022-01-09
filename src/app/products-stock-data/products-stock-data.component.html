@@ -1,0 +1,75 @@
+<div class="router-outlet-content-container">
+  <mat-toolbar>
+    <span>Products Stock Data</span>
+  </mat-toolbar>
+
+  <div *ngIf="productsStockData.length > 0">
+    <mat-form-field appearance="standard">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+
+    <div class="mat-elevation-z2">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="productName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Product Name</th>
+          <td mat-cell *matCellDef="let productStockData"> {{productStockData.product.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="stockValue">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Stock Value</th>
+          <td mat-cell *matCellDef="let productStockData"> {{productStockData.stockValue}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="providers">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Providers</th>
+          <td mat-cell *matCellDef="let productStockData">
+            <div *ngIf="getProductProviders(productStockData.productId); let providers">
+              <div *ngFor="let productProvider of providers">
+                {{productProvider.provider.username}}
+              </div>
+              <div *ngIf="!providers || providers.length === 0">
+                <mat-chip-list>
+                  <mat-chip color="accent" selected>No Providers</mat-chip>
+                </mat-chip-list>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let productStockData" class="mat-cell-actions">
+            <a matTooltip="Edit"
+               (click)="editProductProviders(productStockData)"
+               matTooltipPosition="above" matRipple [matRippleCentered]="true" [matRippleRadius]="25">
+              <mat-icon color="primary">edit</mat-icon>
+            </a>
+            <!--            <a matTooltip="Delete" [class.disabled]="authenticatedUsername === user.username ? true : null"-->
+            <!--               (click)="deleteUser(user)"-->
+            <!--               matTooltipPosition="above" matRipple [matRippleCentered]="true" [matRippleRadius]="25">-->
+            <!--              <mat-icon *ngIf="authenticatedUsername !== user.username" color="warn">delete</mat-icon>-->
+            <!--              <mat-icon *ngIf="authenticatedUsername === user.username">delete</mat-icon>-->
+            <!--            </a>-->
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="row-highlighting"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+  <div *ngIf="productsStockData.length === 0" class="no-table-content-message">
+    <mat-chip-list>
+      <mat-chip color="accent" selected>Something went wrong - no products stock data are provided</mat-chip>
+    </mat-chip-list>
+  </div>
+</div>
+

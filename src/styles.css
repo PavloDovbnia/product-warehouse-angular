@@ -97,3 +97,8 @@ tr.row-highlighting:active {
 .full-width {
   width: 100%;
 }
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}

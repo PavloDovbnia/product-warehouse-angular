@@ -26,10 +26,6 @@ export class ItemPropertiesService {
     this.dataSourceProperty.next(property);
   }
 
-  getInitData(): Observable<object> {
-    return this.http.get<object>(this.baseUrl + 'getInitData');
-  }
-
   getProperties(itemLevel: string): Observable<ItemProperty[]> {
     return this.http.get<ItemProperty[]>(this.baseUrl + itemLevel.toLowerCase() + '/getAll');
   }

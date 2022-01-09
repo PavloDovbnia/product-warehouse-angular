@@ -22,6 +22,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatCardModule} from '@angular/material/card';
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatSelectModule} from "@angular/material/select";
+import {FlexLayoutModule} from "@angular/flex-layout";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 const MaterialComponents = [
   MatSliderModule,
@@ -46,6 +49,9 @@ const MaterialComponents = [
   MatCardModule,
   MatTabsModule,
   MatSelectModule,
+  FlexLayoutModule,
+  MatAutocompleteModule,
+  MatCheckboxModule,
 ];
 
 @NgModule({

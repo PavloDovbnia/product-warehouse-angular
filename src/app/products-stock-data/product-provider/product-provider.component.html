@@ -1,0 +1,23 @@
+<div *ngIf="productProviders">
+  <div class="content-editor">
+    <mat-toolbar>
+      <span>{{productProviders.product.name}}</span>
+    </mat-toolbar>
+    <mat-card>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout="column wrap">
+
+        <mat-selection-list formControlName="providers" [(ngModel)]="chosenProviders">
+          <mat-list-option *ngFor="let provider of providers" [value]="provider">
+            {{provider}}
+          </mat-list-option>
+        </mat-selection-list>
+
+        <div fxLayout="row" fxLayoutAlign="center">
+          <button type="submit" mat-raised-button mat-button color="primary" [disabled]="form.invalid">Save</button>
+          <button type="button" mat-raised-button mat-button style="margin-left: 20px" (click)="onCancel()">Cancel
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

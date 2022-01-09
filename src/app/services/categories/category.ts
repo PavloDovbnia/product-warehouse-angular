@@ -6,4 +6,8 @@ export class Category {
     this.id = id;
     this.name = name;
   }
+
+  static empty(): Category {
+    return new Category(BigInt(0), '');
+  }
 }

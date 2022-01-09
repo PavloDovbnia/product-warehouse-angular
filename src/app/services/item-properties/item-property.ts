@@ -5,6 +5,7 @@ export class ItemProperty {
   type: string;
   dataType: string;
   itemLevel: string;
+  value?: string;
 
   constructor(id: bigint, token: string, name: string, type: string, dataType: string, itemLevel: string) {
     this.id = id;

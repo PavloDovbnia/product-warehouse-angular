@@ -29,11 +29,7 @@ export class NavigationComponent implements OnInit {
     } else {
       this.menu = [];
     }
-  }
-
-  ngOnInit(): void {
     this.updateUserData();
-
     Emitters.authEmitter.subscribe(
       (auth: boolean) => {
         if (auth) {
@@ -44,6 +40,15 @@ export class NavigationComponent implements OnInit {
         this.updateUserData();
       }
     );
+  }
+
+  ngOnInit(): void {
+    this.isMenuOpened = false;
+    if (!this.menu || this.menu.length === 0) {
+      this.menuService.getMenu().subscribe(menu => {
+        this.menu = this.handleRequestedMenu(menu);
+      });
+    }
   }
 
   ngLogout(): void {
@@ -64,6 +69,12 @@ export class NavigationComponent implements OnInit {
   private handleRequestedMenu(menu: Menu[]): Menu[] {
     let authorities = this.tokenStorage.getAuthorities();
     if (authorities.length > 0) {
+      menu.forEach(menu => {
+        menu.outletLink = menu.groupName.replace(' ', '-').toLowerCase();
+        menu.items.forEach(item => {
+          item.outletLink = item.name.replace(' ', '-').toLowerCase();
+        });
+      });
       this.menuStorage.saveMenu(menu, authorities);
     }
     return menu;

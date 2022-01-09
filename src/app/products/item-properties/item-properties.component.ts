@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
@@ -18,7 +18,7 @@ import {ItemPropertyValueDataType} from "../../services/item-properties/item-pro
   templateUrl: './item-properties.component.html',
   styleUrls: ['./item-properties.component.css']
 })
-export class ItemPropertiesComponent implements OnInit, AfterViewInit {
+export class ItemPropertiesComponent implements OnInit {
 
   properties: ItemProperty[] = new Array<ItemProperty>();
 
@@ -33,7 +33,7 @@ export class ItemPropertiesComponent implements OnInit, AfterViewInit {
   propertyValueDataType: ItemPropertyValueDataType;
 
   displayedColumns: string[] = ['name', 'valueType', 'valueDataType', 'itemLevel', 'actions'];
-  dataSource = new MatTableDataSource(this.properties);
+  dataSource = new MatTableDataSource<ItemProperty>();
 
   constructor(private utilsService: UtilsService, private propertiesService: ItemPropertiesService, private navigation: NavigationComponent, private router: Router, private initDataStorage: InitDataStorageService) {
     this.itemLevels = this.initDataStorage.getItemLevels();
@@ -47,11 +47,12 @@ export class ItemPropertiesComponent implements OnInit, AfterViewInit {
     this.propertyValueDataType = this.initDataStorage.getItemPropertyValueDataTypes()[0];
   }
 
-  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
-  @ViewChild(MatSort) sort: MatSort | undefined;
+  @ViewChild(MatPaginator) set matPaginator(paginator: MatPaginator) {
+    this.dataSource.paginator = paginator;
+  }
 
-  ngAfterViewInit(): void {
-    this.decorateDataSource();
+  @ViewChild(MatSort) set matSort(sort: MatSort) {
+    this.dataSource.sort = sort;
   }
 
   applyFilter(event: Event) {
@@ -101,10 +102,5 @@ export class ItemPropertiesComponent implements OnInit, AfterViewInit {
         this.utilsService.openSnackBar(error.message);
       }
     );
-  }
-
-  private decorateDataSource(): void {
-    this.dataSource.paginator = this.paginator ? this.paginator : null;
-    this.dataSource.sort = this.sort ? this.sort : null;
   }
 }

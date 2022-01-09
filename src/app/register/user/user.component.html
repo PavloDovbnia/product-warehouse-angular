@@ -1,0 +1,36 @@
+<div *ngIf="user">
+  <div class="content-editor">
+    <mat-toolbar>
+      <span *ngIf="user.username === ''">New User</span>
+      <span *ngIf="user.username !== ''">{{user.username}}</span>
+    </mat-toolbar>
+    <mat-card>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" fxLayout="column wrap">
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Fill User Name</mat-label>
+          <input matInput placeholder="User Name" formControlName="username"
+                 [(ngModel)]="user.username">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Fill Email</mat-label>
+          <input matInput placeholder="Email" formControlName="email"
+                 [(ngModel)]="user.email">
+        </mat-form-field>
+
+        <mat-selection-list formControlName="roles" [(ngModel)]="userRoles">
+          <mat-list-option *ngFor="let role of roles" [value]="role">
+            {{role}}
+          </mat-list-option>
+        </mat-selection-list>
+
+        <div fxLayout="row" fxLayoutAlign="center">
+          <button type="submit" mat-raised-button mat-button color="primary" [disabled]="form.invalid">Save</button>
+          <button type="button" mat-raised-button mat-button style="margin-left: 20px" (click)="onCancel()">Cancel
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

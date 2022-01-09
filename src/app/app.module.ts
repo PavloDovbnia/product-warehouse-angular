@@ -20,6 +20,12 @@ import {ForgotPasswordComponent} from './login/forgot-password/forgot-password.c
 import {ResetPasswordComponent} from './login/reset-password/reset-password.component';
 import {ItemPropertiesComponent} from './products/item-properties/item-properties.component';
 import {ItemPropertyComponent} from "./products/item-properties/item-property/item-property.component";
+import {ManufacturersComponent} from './products/manufacturers/manufacturers.component';
+import {ManufacturerComponent} from './products/manufacturers/manufacturer/manufacturer.component';
+import {ChangePasswordComponent} from './login/change-password/change-password.component';
+import {UserComponent} from './register/user/user.component';
+import {ProductsStockDataComponent} from './products-stock-data/products-stock-data.component';
+import {ProductProviderComponent} from './products-stock-data/product-provider/product-provider.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +40,12 @@ import {ItemPropertyComponent} from "./products/item-properties/item-property/it
     ResetPasswordComponent,
     ItemPropertiesComponent,
     ItemPropertyComponent,
+    ManufacturersComponent,
+    ManufacturerComponent,
+    ChangePasswordComponent,
+    UserComponent,
+    ProductsStockDataComponent,
+    ProductProviderComponent,
   ],
   imports: [
     BrowserModule,

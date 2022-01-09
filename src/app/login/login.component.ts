@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getAuthorities();
-      this.router.navigate(['auth/login']).then(() => {
+      this.router.navigate(['']).then(() => {
       });
     }
   }
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getAuthorities();
         Emitters.authEmitter.emit(true);
-        this.router.navigate(['home']).then(() => {
+        this.router.navigate(['']).then(() => {
         });
       },
       error => {

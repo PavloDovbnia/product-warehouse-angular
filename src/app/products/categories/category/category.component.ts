@@ -23,17 +23,23 @@ export class CategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.categoriesService.sharingCategory.subscribe(category => this.category = category);
+    this.categoriesService.sharingCategory.subscribe(category => {
+      this.category = category;
+    });
   }
 
   onSubmit(): void {
-    const category: Category = {
-      id: this.category ? this.category.id : BigInt(0),
-      name: this.form.value.categoryName,
-    };
-    this.categoriesService.saveCategory(category).subscribe(categories => this.categoriesService.shareCategories(categories));
-    this.utilsService.openSnackBar(category.name + ' category is saved');
-    this.navigateToCategories();
+    if (this.category) {
+      const category: Category = {
+        id: this.category.id,
+        name: this.form.value.categoryName,
+      };
+      this.categoriesService.saveCategory(category).subscribe(categories => this.categoriesService.shareCategories(categories));
+      this.utilsService.openSnackBar(category.name + ' category is saved');
+      this.navigateToCategories();
+    } else {
+      this.utilsService.openSnackBar('Category is empty');
+    }
   }
 
   onCancel(): void {

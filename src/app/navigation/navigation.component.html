@@ -12,7 +12,7 @@
       <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #accountMenu="matMenu">
-      <button mat-menu-item>
+      <button mat-menu-item [routerLink]="['', {outlets: {primary: ['change-password']}}]">
         <mat-icon>settings</mat-icon>
         <span>Change Password</span>
       </button>
@@ -41,7 +41,7 @@
                   </mat-expansion-panel-header>
                   <mat-nav-list>
                     <mat-list-item *ngFor="let menuItem of menuGroup.items"
-                      [routerLink]="['', {outlets: {content: [ menuGroup.groupName.toLowerCase(), menuItem.name.toLowerCase()]}}]">
+                      [routerLink]="['', {outlets: {primary: [ menuGroup.outletLink, menuItem.outletLink]}}]">
                       <a matLine> {{menuItem.name}} </a>
                     </mat-list-item>
                   </mat-nav-list>
@@ -50,7 +50,7 @@
               </div>
               <div *ngIf="menuGroup.groupName === ''">
                 <mat-list-item *ngFor="let menuItem of menuGroup.items"
-                  [routerLink]="['', {outlets: {content: [menuItem.name.toLowerCase()]}}]">
+                  [routerLink]="['', {outlets: {primary: [menuItem.outletLink]}}]">
                   <a matLine> {{menuItem.name}} </a>
                 </mat-list-item>
               </div>
@@ -58,36 +58,9 @@
           </mat-nav-list>
         </mat-sidenav>
         <mat-sidenav-content>
-          <router-outlet name="content"></router-outlet>
+          <router-outlet></router-outlet>
         </mat-sidenav-content>
       </mat-sidenav-container>
-
-
-      <!--      <mat-form-field appearance="fill">-->
-      <!--        <mat-label>Sidenav mode</mat-label>-->
-      <!--        <mat-select #mode value="side">-->
-      <!--          <mat-option value="side">Side</mat-option>-->
-      <!--          <mat-option value="over">Over</mat-option>-->
-      <!--          <mat-option value="push">Push</mat-option>-->
-      <!--        </mat-select>-->
-      <!--      </mat-form-field>-->
-      <!--      <mat-form-field appearance="fill">-->
-      <!--        <mat-label>Has backdrop</mat-label>-->
-      <!--        <mat-select #hasBackdrop>-->
-      <!--          <mat-option>Unset</mat-option>-->
-      <!--          <mat-option [value]="true">True</mat-option>-->
-      <!--          <mat-option [value]="false">False</mat-option>-->
-      <!--        </mat-select>-->
-      <!--      </mat-form-field>-->
-      <!--      <button mat-raised-button (click)="drawer.toggle()">Toggle drawer</button>-->
     </mat-drawer-content>
   </mat-drawer-container>
-
-  <!--  <mat-sidenav-container autosize>-->
-  <!--    <mat-sidenav #editor [(opened)]="isEditorOpened" mode="over" position="end" [fixedInViewport]="true" [fixedTopGap]="64" class="editor-container">-->
-  <!--      <router-outlet name="editor"></router-outlet>-->
-  <!--    </mat-sidenav>-->
-  <!--    <mat-sidenav-content style="visibility: hidden"></mat-sidenav-content>-->
-  <!--  </mat-sidenav-container>-->
-
 </div>
